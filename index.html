@@ -6,98 +6,80 @@
   <title>Giclée Print Price Calculator</title>
   <style>
     body {
-      background: #ececec;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       margin: 0;
-      padding: 40px 20px;
+      padding: 20px;
+      background-color: #e4e4e4;
+      font-family: "Georgia", serif;
     }
 
-    .container {
-      max-width: 800px;
+    .wrapper {
+      max-width: 700px;
       margin: auto;
       background: white;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      padding: 40px 30px;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
 
     h1 {
-      text-align: center;
-      font-size: 28px;
-      color: #444;
-      margin-bottom: 30px;
-    }
-
-    .form-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
+      font-size: 26px;
       margin-bottom: 20px;
-    }
-
-    .form-group {
-      flex: 1;
-      min-width: 200px;
+      text-align: center;
+      color: #222;
     }
 
     label {
-      font-weight: 600;
       display: block;
-      margin-bottom: 6px;
+      font-weight: bold;
+      margin-top: 15px;
       color: #333;
     }
 
     input, select {
       width: 100%;
-      padding: 10px;
-      font-size: 15px;
+      padding: 6px 8px;
+      font-size: 14px;
+      margin-top: 5px;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 3px;
       box-sizing: border-box;
-      transition: all 0.2s;
-    }
-
-    input:focus, select:focus {
-      border-color: #0077cc;
-      outline: none;
-      box-shadow: 0 0 5px rgba(0,119,204,0.3);
+      font-family: inherit;
     }
 
     button {
-      display: block;
+      margin-top: 25px;
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       font-size: 16px;
+      background-color: #3f729b;
       color: white;
-      background-color: #0077cc;
       border: none;
-      border-radius: 6px;
+      border-radius: 4px;
       cursor: pointer;
-      margin-top: 10px;
-      transition: background 0.3s ease;
     }
 
     button:hover {
-      background-color: #005fa3;
+      background-color: #345f7c;
     }
 
     .total {
+      font-size: 22px;
       text-align: center;
-      font-size: 24px;
-      margin-top: 30px;
+      margin-top: 25px;
       font-weight: bold;
-      color: #222;
+      color: #111;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 30px;
+      font-size: 15px;
     }
 
     th, td {
-      padding: 12px;
-      border-bottom: 1px solid #ccc;
+      padding: 10px;
+      border-bottom: 1px dotted #ccc;
       text-align: center;
     }
 
@@ -107,7 +89,6 @@
 
     th {
       background-color: #f0f0f0;
-      font-weight: bold;
     }
 
     .hidden {
@@ -116,34 +97,27 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="wrapper">
     <h1>Giclée Print Price Calculator</h1>
     <form onsubmit="event.preventDefault(); calculate();">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="width">Width (mm)</label>
-          <input type="number" id="width" placeholder="e.g. 210" required>
-        </div>
-        <div class="form-group">
-          <label for="height">Height (mm)</label>
-          <input type="number" id="height" placeholder="e.g. 297" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="border">Paper White Border (mm)</label>
-          <input type="number" id="border" placeholder="e.g. 10">
-        </div>
-        <div class="form-group">
-          <label for="spray">Protective Spray Fixative</label>
-          <select id="spray">
-            <option value="0">No</option>
-            <option value="0.03">Yes</option>
-          </select>
-        </div>
-      </div>
+      <label for="width">Width (mm)</label>
+      <input type="number" id="width" placeholder="e.g. 210" required>
+
+      <label for="height">Height (mm)</label>
+      <input type="number" id="height" placeholder="e.g. 297" required>
+
+      <label for="border">Paper White Border (mm)</label>
+      <input type="number" id="border" placeholder="e.g. 10">
+
+      <label for="spray">Protective Spray Fixative</label>
+      <select id="spray">
+        <option value="0">No</option>
+        <option value="0.03">Yes</option>
+      </select>
+
       <button type="submit">Calculate Price</button>
     </form>
+
     <div class="total" id="total">Total: —</div>
 
     <table id="comparisonTable" class="hidden">
