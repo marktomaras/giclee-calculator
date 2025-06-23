@@ -93,115 +93,7 @@
       font-family: 'Helvetica Neue Light', Arial, sans-serif;
       font-weight: 300;
     }
-  @media (max-width: 600px) {
-  .desktop-discount { display: none !important; }
-  .mobile-discount { display: inline !important; }
-  .form-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .form-group {
-    min-width: unset;
-    width: 100%;
-  }
-  #paper {
-    width: 100% !important;
-  }
-  .discount-table {
-    width: 100%;
-    border: none;
-  }
-  .discount-table thead {
-    display: none;
-  }
-  .discount-table tbody tr {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #ccc;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    background-color: #fff;
-  }
-  .discount-table td {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem;
-    border: none;
-    font-size: 1rem;
-  }
-  .discount-table td::before {
-    content: attr(data-label);
-    font-weight: bold;
-    margin-right: 1rem;
-  }
-  .calculator {
-    padding: 1rem;
-  }
-  #previewSVG {
-    width: 100% !important;
-    height: auto !important;
-  }
-  button {
-    width: 100% !important;
-  }
-}
-  .form-group {
-    min-width: unset;
-    width: 100%;
-  }
-  #paper {
-    width: 100% !important;
-  }
-  .discount-table thead,
-  .discount-table tbody,
-  .discount-table th,
-  .discount-table td,
-  .discount-table tr {
-    display: block;
-    width: 100%;
-    text-align: left;
-  }
-  .discount-table th,
-  .discount-table td {
-    padding: 0.5rem;
-    border: none;
-    border-bottom: 1px solid #ccc;
-  }
-  .discount-table thead {
-    display: none;
-  }
-  .calculator {
-    padding: 1rem;
-  }
-  #previewSVG {
-    width: 100% !important;
-    height: auto !important;
-  }
-  button {
-    width: 100% !important;
-  }
-}
-  .form-group {
-    min-width: unset;
-    width: 100%;
-  }
-  .discount-table {
-    display: block;
-    overflow-x: auto;
-    width: 100%;
-  }
-  #previewSVG {
-    width: 100% !important;
-    height: auto !important;
-  }
-  button {
-    width: 100% !important;
-  }
-  .calculator {
-    padding: 1rem;
-  }
-}
-</style>
+  </style>
 </head>
 <body>
   <div class="calculator">
@@ -252,18 +144,18 @@
         <tr>
           <th>Print Quantity</th>
           <th>1–3 Prints</th>
-          <th><span style="font-family: 'Helvetica Neue';">4–10 Prints</span><br><span class="desktop-discount" style="font-family: 'Helvetica Neue Light';">(10% Discount)</span><span class="mobile-discount" style="display: none; font-family: 'Helvetica Neue Light';">(10% Disc)</span></th>
-          <th><span style="font-family: 'Helvetica Neue';">11–20 Prints</span><br><span class="desktop-discount" style="font-family: 'Helvetica Neue Light';">(15% Discount)</span><span class="mobile-discount" style="display: none; font-family: 'Helvetica Neue Light';">(15% Disc)</span></th>
-          <th><span style="font-family: 'Helvetica Neue';">20+ Prints</span><br><span class="desktop-discount" style="font-family: 'Helvetica Neue Light';">(20% Discount)</span><span class="mobile-discount" style="display: none; font-family: 'Helvetica Neue Light';">(20% Disc)</span></th>
+          <th><span style="font-family: 'Helvetica Neue';">4–10 Prints</span><br><span style="font-family: 'Helvetica Neue Light';">(10% Discount)</span></th>
+          <th><span style="font-family: 'Helvetica Neue';">11–20 Prints</span><br><span style="font-family: 'Helvetica Neue Light';">(15% Discount)</span></th>
+          <th><span style="font-family: 'Helvetica Neue';">20+ Prints</span><br><span style="font-family: 'Helvetica Neue Light';">(20% Discount)</span></th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>Price Per Print</strong></td>
-          <td id="price1to3" data-label="1–3 Prints">€0.00</td>
-          <td id="price4to10" data-label="4–10 Prints (10% Disc)"><div class="desktop-discount">4–10 Prints<br><span style='font-family: Helvetica Neue Light;'>(10% Disc)</span></div><div id="price4to10-value"></div></td>
-          <td id="price11to20" data-label="11–20 Prints (15% Disc)"><div class="desktop-discount">11–20 Prints<br><span style='font-family: Helvetica Neue Light;'>(15% Disc)</span></div><div id="price11to20-value"></div></td>
-          <td id="price20plus" data-label="20+ Prints (20% Disc)"><div class="desktop-discount">20+ Prints<br><span style='font-family: Helvetica Neue Light;'>(20% Disc)</span></div><div id="price20plus-value"></div></td>
+          <td id="price1to3">€0.00</td>
+          <td id="price4to10">€0.00</td>
+          <td id="price11to20">€0.00</td>
+          <td id="price20plus">€0.00</td>
         </tr>
       </tbody>
     </table>
@@ -304,11 +196,7 @@ const totalHeight = imgHeight + border + border + bottomExtra;
 
       for (let i = 0; i < discounts.length; i++) {
         const discounted = basePrice * (1 - discounts[i]);
-        if (document.getElementById(ids[i] + '-value')) {
-  document.getElementById(ids[i] + '-value').textContent = `€${discounted.toFixed(2)}`;
-} else {
-  document.getElementById(ids[i]).textContent = `€${discounted.toFixed(2)}`;
-}
+        document.getElementById(ids[i]).textContent = `€${discounted.toFixed(2)}`;
       }
     }
 
