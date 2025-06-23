@@ -181,7 +181,7 @@ const imageArea = (imgWidth / 1000) * (imgHeight / 1000);
 const totalArea = (totalWidth / 1000) * (totalHeight / 1000);
 const borderArea = totalArea - imageArea;
 
-const imageRate = 160;
+const imageRate = paperRate;
 const borderRate = 60;
 
 const imageCost = Math.max(imageArea * imageRate, 15);
