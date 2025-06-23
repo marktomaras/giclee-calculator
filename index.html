@@ -1,99 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Fine Art Print Price Calculator</title>
-  <style>
-    body {
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      background-color: #f0f0f0;
-      margin: 0;
-      padding: 2rem;
-    }
-    .calculator, .results {
-      max-width: 800px;
-      background: #ffffff;
-      margin: 0 auto 2rem;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1.5rem;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 1rem;
-      text-align: center;
-    }
-    th {
-      background-color: #f9f9f9;
-    }
-    td {
-      background-color: #e6f0fa;
-    }
-    .note {
-      font-size: 0.85rem;
-      margin-top: 0.5rem;
-    }
-    .iva-note {
-      text-align: right;
-      font-size: 0.75rem;
-      color: #888;
-      margin-top: 4px;
-    }
-  </style>
 </head>
 <body>
-  <div class="calculator">
-    <h1>Fine Art Print Price Calculator</h1>
-    <form>
-      <label>Image Width (mm)</label><input type="number" /><br><br>
-      <label>Image Height (mm)</label><input type="number" /><br><br>
-      <label>Paper White Border Around Image (mm)</label><input type="number" /><br><br>
-      <label>Added Paper Border Dimension Under Image (mm)</label><input type="number" /><br><br>
-      <label>Paper Type</label>
-      <select>
-        <option>Canson Infinity Rag Photographique 310gsm</option>
-        <option>Canson Infinity Arches 88 310gsm</option>
-        <option>Canson Infinity Arches BFK Rives 310gsm</option>
-        <option>Canson Infinity Arches Aquarelle 310gsm</option>
-        <option>Canson Infinity Baryta Prestige II 340gsm</option>
-        <option>Hahnemühle Torchon 285gsm</option>
-        <option>Hahnemühle William Turner 310gsm</option>
-        <option>Awagami Bamboo 170gsm</option>
-      </select><br><br>
-      <button type="button">Calculate</button>
-    </form>
-  </div>
+<pre style="font-family: Helvetica, sans-serif; font-size: 16px; white-space: pre-wrap;">
+Fine Art Print Price Calculator
+Image Width (mm)
 
-  <div class="results">
-    <table>
-      <thead>
-        <tr>
-          <th>Print Quantity</th>
-          <th>1–3 Prints</th>
-          <th>4–10 Prints<br><small>(10% Discount)</small></th>
-          <th>11–20 Prints<br><small>(15% Discount)</small></th>
-          <th>20+ Prints<br><small>(20% Discount)</small></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Price Per Print</strong></td>
-          <td>€0.00</td>
-          <td>€0.00</td>
-          <td>€0.00</td>
-          <td>€0.00</td>
-        </tr>
-      </tbody>
-    </table>
-    <p class="note">* Minimum print size is A4, but we can print two A5 prints on a single A4 sheet at the A4 price</p>
-    <div class="iva-note"><em>IVA Additional</em></div>
-    <p>Simulation: Paper and image with specified border to scale</p>
-  </div>
+Image Height (mm)
+
+Paper White Border Around Image (mm)
+
+Added Paper Border Dimension Under Image (mm)
+
+Paper Type
+          Canson Infinity Rag Photographique 310gsm
+          Canson Infinity Arches 88 310gsm
+          Canson Infinity Arches BFK Rives 310gsm
+          Canson Infinity Arches Aquarelle 310gsm
+          Canson Infinity Baryta Prestige II 340gsm
+          Hahnemühle Torchon 285gsm
+          Hahnemühle William Turner 310gsm
+          Awagami Bamboo 170gsm
+        
+Calculate
+Print Quantity
+1–3 Prints
+4–10 Prints
+(10% Discount)
+11–20 Prints
+(15% Discount)
+20+ Prints
+(20% Discount)
+Price Per Print
+€0.00
+€0.00
+€0.00
+€0.00
+* Minimum print size is A4, but we can print two A5 prints on a single A4 sheet at the A4 price
+<div style="text-align: right; font-size: 0.75rem; color: #888;"><em>IVA Additional</em></div>
+Simulation: Paper and image with specified border to scale
+</pre>
 </body>
 </html>
