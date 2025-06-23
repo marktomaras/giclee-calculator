@@ -19,46 +19,6 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    h1 {
-      font-size: 1.8rem;
-      color: #444;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-    .form-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-    .form-group {
-      flex: 1;
-      min-width: 180px;
-      display: flex;
-      flex-direction: column;
-    }
-    label {
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-    input, select {
-      padding: 0.6rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      padding: 0.6rem 1.2rem;
-      background-color: #3366cc;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #254a99;
-    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -90,54 +50,24 @@
 <body>
   <div class="calculator">
     <h1>Fine Art Print Price Calculator</h1>
-    <div class="form-row">
-      <div class="form-group">
-        <label for="width">Image Width (mm)</label>
-        <input type="number" id="width" placeholder="e.g., 500" />
-      </div>
-      <div class="form-group">
-        <label for="height">Image Height (mm)</label>
-        <input type="number" id="height" placeholder="e.g., 700" />
-      </div>
-      <div class="form-group">
-        <label for="border">Paper White Border Around Image (mm)</label>
-        <select id="border">
-          <option value="0">0</option>
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50" selected>50</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group" style="flex: 2;">
-        <label for="extraBorder">Added Paper Border Dimension Under Image (mm)</label>
-        <select id="extraBorder">
-          <option value="0" selected>0</option>
-          <option value="20">20</option>
-          <option value="40">40</option>
-          <option value="60">60</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group" style="flex: 2;">
-        <label for="paper">Paper Type</label>
-        <select id="paper">
-          <option>Canson Infinity Rag Photographique 310gsm</option>
-          <option>Canson Infinity Arches 88 310gsm</option>
-          <option>Canson Infinity Arches BFK Rives 310gsm</option>
-          <option>Canson Infinity Arches Aquarelle 310gsm</option>
-          <option>Canson Infinity Baryta Prestige II 340gsm</option>
-          <option>Hahnemühle Torchon 285gsm</option>
-          <option>Hahnemühle William Turner 310gsm</option>
-          <option>Awagami Bamboo 170gsm</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-row" style="justify-content: flex-end;">
-      <button onclick="calculatePrintPrice()">Calculate</button>
-    </div>
+    <form>
+      <label>Image Width (mm)</label><input type="number" /><br><br>
+      <label>Image Height (mm)</label><input type="number" /><br><br>
+      <label>Paper White Border Around Image (mm)</label><input type="number" /><br><br>
+      <label>Added Paper Border Dimension Under Image (mm)</label><input type="number" /><br><br>
+      <label>Paper Type</label>
+      <select>
+        <option>Canson Infinity Rag Photographique 310gsm</option>
+        <option>Canson Infinity Arches 88 310gsm</option>
+        <option>Canson Infinity Arches BFK Rives 310gsm</option>
+        <option>Canson Infinity Arches Aquarelle 310gsm</option>
+        <option>Canson Infinity Baryta Prestige II 340gsm</option>
+        <option>Hahnemühle Torchon 285gsm</option>
+        <option>Hahnemühle William Turner 310gsm</option>
+        <option>Awagami Bamboo 170gsm</option>
+      </select><br><br>
+      <button type="button">Calculate</button>
+    </form>
   </div>
 
   <div class="results">
@@ -154,26 +84,16 @@
       <tbody>
         <tr>
           <td><strong>Price Per Print</strong></td>
-          <td id="price1to3">€0.00</td>
-          <td id="price4to10">€0.00</td>
-          <td id="price11to20">€0.00</td>
-          <td id="price21plus">€0.00</td>
+          <td>€0.00</td>
+          <td>€0.00</td>
+          <td>€0.00</td>
+          <td>€0.00</td>
         </tr>
       </tbody>
     </table>
     <p class="note">* Minimum print size is A4, but we can print two A5 prints on a single A4 sheet at the A4 price</p>
     <div class="iva-note"><em>IVA Additional</em></div>
+    <p>Simulation: Paper and image with specified border to scale</p>
   </div>
-
-  <script>
-    function calculatePrintPrice() {
-      // placeholder logic — replace with your actual pricing logic
-      const ids = ["price1to3", "price4to10", "price11to20", "price21plus"];
-      for (let id of ids) {
-        document.getElementById(id).textContent = "€0.00";
-      }
-    }
-  </script>
 </body>
 </html>
-
