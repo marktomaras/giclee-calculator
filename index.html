@@ -2,38 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Art Repro Photography Price Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fine Art Print Calculator</title>
   <style>
-    @font-face {
-      font-family: 'Helvetica Neue';
-      src: local('Helvetica Neue'), local('HelveticaNeue');
-    }
-    @font-face {
-      font-family: 'Helvetica Neue Light';
-      src: local('Helvetica Neue Light'), local('HelveticaNeue-Light');
-      font-weight: 300;
-    }
     body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Helvetica Neue', sans-serif;
       background-color: #f0f0f0;
       margin: 0;
       padding: 2rem;
     }
+
     .calculator {
       max-width: 700px;
       background: #ffffff;
-      margin: 0 auto;
+      margin: 0 auto 1cm auto;
       padding: 2rem;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    h1 {
-      font-size: 1.8rem;
-      color: #444;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
+
     .form-row {
       display: flex;
       flex-wrap: wrap;
@@ -41,148 +28,210 @@
       margin-bottom: 1rem;
       align-items: flex-end;
     }
+
     .form-group {
       flex: 1;
       display: flex;
       flex-direction: column;
-      min-width: 200px;
+      min-width: 150px;
     }
+
     label {
       font-weight: bold;
       margin-bottom: 0.5rem;
     }
-    select {
+
+    input[type="number"], select {
       padding: 0.6rem;
       font-size: 1rem;
       border: 1px solid #ccc;
       border-radius: 5px;
-      cursor: pointer;
     }
+
     button {
-      padding: 0.5rem 0.75rem;
+      padding: 0.75rem 1.5rem;
       background-color: #3366cc;
       color: white;
       border: none;
       border-radius: 5px;
-      font-size: 0.875rem;
+      font-size: 1rem;
       cursor: pointer;
     }
+
     button:hover {
       background-color: #254a99;
     }
+
     .discount-table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 2rem;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-    }
-    .discount-table th, .discount-table td {
-      border: 1px solid #ccc;
-      padding: 1rem;
       text-align: center;
-      vertical-align: middle;
     }
-    .discount-table th {
-      background-color: #f9f9f9;
-    }
+
+    .discount-table th,
     .discount-table td {
-      background-color: #e6f0fa;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
     }
-    .discount-table th:not(:first-child) {
-      font-family: 'Helvetica Neue Light', Arial, sans-serif;
-      font-weight: 300;
-    }
-    .iva-note {
+
+    .illustration-container {
+      max-width: 700px;
+      margin: 2rem auto;
       text-align: right;
-      font-size: 0.75rem;
-      color: #888;
-      margin-top: 4px;
+    }
+
+    .discount-label {
+      font-family: 'Helvetica Neue Light', sans-serif;
+      font-size: 0.9rem;
+      color: #666;
     }
   </style>
 </head>
 <body>
   <div class="calculator">
-    <h1>Art Repro Photography Price Calculator</h1>
+    <h1>Fine Art Print Price Calculator</h1>
     <div class="form-row">
       <div class="form-group">
-        <label for="size">Artwork Size</label>
-        <select id="size">
-          <option value="small">Long dimension ≤ 120cm</option>
-          <option value="large">Long dimension > 120cm</option>
-        </select>
+        <label for="width">Image Width (mm)</label>
+        <input type="number" id="width" placeholder="e.g., 420"/>
       </div>
       <div class="form-group">
-        <label for="metallic">Metallic/Iridescent Paint?</label>
-        <select id="metallic">
-          <option value="no">No</option>
-          <option value="yes">Yes</option>
-        </select>
+        <label for="height">Image Height (mm)</label>
+        <input type="number" id="height" placeholder="e.g., 594"/>
       </div>
       <div class="form-group">
-        <label for="detail">Level of Detail Captured</label>
-        <select id="detail">
-          <option value="single">Single Frame Capture</option>
-          <option value="4frame">4 Frame Multi-Capture</option>
-          <option value="16frame">16 Frame Multi-Capture</option>
-          <option value="64frame">64 Frame Multi-Capture</option>
+        <label for="border">Paper White Border Around Image (mm)</label>
+        <input type="number" id="border" value="0"/>
+      </div>
+      <div class="form-group">
+        <label for="bottomBorder">Added Paper Border Dimension Under Image (mm)</label>
+        <input type="number" id="bottomBorder" value="0"/>
+      </div>
+      <div class="form-group">
+        <label for="paper">Paper Type</label>
+        <select id="paper">
+          <option value="160">Hahnemühle Photo Rag 308gsm</option>
+          <option value="160">Canson Infinity Rag Photographique 310gsm</option>
+          <option value="160">Hahnemühle Baryta FB 350gsm</option>
         </select>
       </div>
-      <div class="form-group" style="align-items: flex-end; display: flex; justify-content: flex-end;">
-        <button onclick="calculateReproPrice()">Calculate</button>
+      <div class="form-group" style="flex: none;">
+        <button onclick="calculatePrice()">Calculate</button>
       </div>
     </div>
+
     <table class="discount-table">
       <thead>
         <tr>
-          <th>Quantity</th>
-          <th>1–4 Pieces</th>
-          <th><span style="font-family: 'Helvetica Neue';">5–9 Pieces</span><br><span style="font-family: 'Helvetica Neue Light';">(10% Discount)</span></th>
-          <th><span style="font-family: 'Helvetica Neue';">10–15 Pieces</span><br><span style="font-family: 'Helvetica Neue Light';">(15% Discount)</span></th>
-          <th><span style="font-family: 'Helvetica Neue';">16+ Pieces</span><br><span style="font-family: 'Helvetica Neue Light';">(20% Discount)</span></th>
+          <th>Print Quantity</th>
+          <th>1–3 Prints</th>
+          <th>4–10 Prints (10% Disc)</th>
+          <th>11–20 Prints (15% Disc)</th>
+          <th>20+ Prints (20% Disc)</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>Price per Piece</strong></td>
-          <td id="price1to4">€0.00</td>
-          <td id="price5to9">€0.00</td>
-          <td id="price10to15">€0.00</td>
-          <td id="price16plus">€0.00</td>
+          <td>Price Per Print</td>
+          <td id="price1to3">€0.00</td>
+          <td id="price4to10">€0.00</td>
+          <td id="price11to20">€0.00</td>
+          <td id="price20plus">€0.00</td>
         </tr>
       </tbody>
     </table>
-    <div class="iva-note"><em>IVA Additional</em></div>
+
+    <p style="font-size: 0.9rem; color: #666; font-family: 'Helvetica Neue'; margin-top: 0.5rem;">
+      * Minimum print size is A4, but we can print two A5 prints on a single A4 sheet at the A4 price
+    </p>
+  </div>
+
+  <div class="illustration-container">
+    <svg id="previewSVG" width="200" height="200" xmlns="http://www.w3.org/2000/svg"></svg>
+    <p style="font-size: 0.85rem; color: #555; font-family: 'Helvetica Neue'; margin-top: 6px; margin-bottom: 0;">
+      Simulation: Paper and image with specified border to scale
+    </p>
   </div>
 
   <script>
-    function calculateReproPrice() {
-      const size = document.getElementById('size').value;
-      const metallic = document.getElementById('metallic').value;
-      const detail = document.getElementById('detail').value;
+    function calculatePrice() {
+      const width = parseFloat(document.getElementById('width').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const border = parseFloat(document.getElementById('border').value);
+      const bottomExtra = parseFloat(document.getElementById('bottomBorder').value);
+      const paperRate = parseFloat(document.getElementById('paper').value);
 
-      let base = 0;
-      if (size === 'large') {
-        if (detail === 'single') base = 45;
-        else if (detail === '4frame') base = 63;
-        else if (detail === '16frame') base = 124;
-        else base = 330;
-      } else {
-        if (detail === 'single') base = 34.5;
-        else if (detail === '4frame') base = 48;
-        else if (detail === '16frame') base = 95;
-        else base = 255;
-      }
+      const minWidth = 210;
+      const minHeight = 297;
+      const minPrice = 15;
 
-      if (metallic === 'yes') base += 10;
+      const finalWidth = width + 2 * border;
+      const finalHeight = height + 2 * border + bottomExtra;
 
-      const discounts = [0, 0.10, 0.15, 0.20];
-      const ids = ['price1to4', 'price5to9', 'price10to15', 'price16plus'];
+      const areaSqM = (finalWidth / 1000) * (finalHeight / 1000);
+      const baseAreaSqM = (width / 1000) * (height / 1000);
+      const borderAreaSqM = areaSqM - baseAreaSqM;
+
+      const imageCost = Math.max(baseAreaSqM * paperRate, minPrice);
+      const borderCost = borderAreaSqM * 75;
+      const totalCost = imageCost + borderCost;
+
+      const discounts = [0, 0.1, 0.15, 0.2];
+      const ids = ['price1to3', 'price4to10', 'price11to20', 'price20plus'];
 
       for (let i = 0; i < discounts.length; i++) {
-        const discounted = base * (1 - discounts[i]);
+        const discounted = totalCost * (1 - discounts[i]);
         document.getElementById(ids[i]).textContent = `€${discounted.toFixed(2)}`;
       }
+
+      updatePreview(width, height, border, bottomExtra);
     }
+
+    function updatePreview(imgW, imgH, border, bottomExtra) {
+      const svg = document.getElementById('previewSVG');
+      svg.innerHTML = '';
+
+      const paperW = imgW + 2 * border;
+      const paperH = imgH + 2 * border + bottomExtra;
+
+      const maxDim = 180;
+      const scale = Math.min(maxDim / paperW, maxDim / paperH);
+
+      const viewW = paperW * scale;
+      const viewH = paperH * scale;
+      svg.setAttribute('width', viewW + 10);
+      svg.setAttribute('height', viewH + 10);
+
+      const paper = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      paper.setAttribute('x', 5);
+      paper.setAttribute('y', 5);
+      paper.setAttribute('width', viewW);
+      paper.setAttribute('height', viewH);
+      paper.setAttribute('fill', 'white');
+      paper.setAttribute('stroke', '#ccc');
+      svg.appendChild(paper);
+
+      const img = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      const imgX = 5 + border * scale;
+      const imgY = 5 + border * scale;
+      const imgWpx = imgW * scale;
+      const imgHpx = imgH * scale;
+      img.setAttribute('x', imgX);
+      img.setAttribute('y', imgY);
+      img.setAttribute('width', imgWpx);
+      img.setAttribute('height', imgHpx);
+      img.setAttribute('fill', '#aaa');
+      svg.appendChild(img);
+    }
+
+    window.onload = function () {
+      document.getElementById('width').value = 420;
+      document.getElementById('height').value = 594;
+      document.getElementById('border').value = 50;
+      calculatePrice();
+    };
   </script>
 </body>
 </html>
+
