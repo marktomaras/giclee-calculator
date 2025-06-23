@@ -165,10 +165,10 @@
         const fullWidth = imgWidth + (border * 2);
         const fullHeight = imgHeight + (border * 2);
         const area = (fullWidth / 1000) * (fullHeight / 1000);
-        const totalWidth = width + 2 * border;
-const totalHeight = height + 2 * border;
+        const totalWidth = imgWidth + 2 * border;
+const totalHeight = imgHeight + 2 * border;
 
-const imageArea = (width / 1000) * (height / 1000);
+const imageArea = (imgWidth / 1000) * (imgHeight / 1000);
 const totalArea = (totalWidth / 1000) * (totalHeight / 1000);
 const borderArea = totalArea - imageArea;
 
