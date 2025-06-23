@@ -11,9 +11,7 @@
       margin: 0;
       padding: 2rem;
     }
-
-    .calculator,
-    .results {
+    .calculator, .results {
       max-width: 800px;
       background: #ffffff;
       margin: 0 auto 2rem;
@@ -21,41 +19,34 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-
     h1 {
       font-size: 1.8rem;
       color: #444;
       margin-bottom: 1.5rem;
       text-align: center;
     }
-
     .form-row {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
       margin-bottom: 1rem;
     }
-
     .form-group {
       flex: 1;
       min-width: 180px;
       display: flex;
       flex-direction: column;
     }
-
     label {
       font-weight: bold;
       margin-bottom: 0.5rem;
     }
-
-    input,
-    select {
+    input, select {
       padding: 0.6rem;
       font-size: 1rem;
       border: 1px solid #ccc;
       border-radius: 5px;
     }
-
     button {
       padding: 0.6rem 1.2rem;
       background-color: #3366cc;
@@ -65,37 +56,29 @@
       font-size: 1rem;
       cursor: pointer;
     }
-
     button:hover {
       background-color: #254a99;
     }
-
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 1.5rem;
     }
-
-    th,
-    td {
+    th, td {
       border: 1px solid #ccc;
       padding: 1rem;
       text-align: center;
     }
-
     th {
       background-color: #f9f9f9;
     }
-
     td {
       background-color: #e6f0fa;
     }
-
     .note {
       font-size: 0.85rem;
       margin-top: 0.5rem;
     }
-
     .iva-note {
       text-align: right;
       font-size: 0.75rem;
@@ -141,16 +124,14 @@
       <div class="form-group" style="flex: 2;">
         <label for="paper">Paper Type</label>
         <select id="paper">
-          <option value="Canson Infinity Rag Photographique 310gsm" selected>
-            Canson Infinity Rag Photographique 310gsm
-          </option>
-          <option value="Canson Infinity Arches 88 310gsm">Canson Infinity Arches 88 310gsm</option>
-          <option value="Canson Infinity Arches BFK Rives 310gsm">Canson Infinity Arches BFK Rives 310gsm</option>
-          <option value="Canson Infinity Arches Aquarelle 310gsm">Canson Infinity Arches Aquarelle 310gsm</option>
-          <option value="Canson Infinity Baryta Prestige II 340gsm">Canson Infinity Baryta Prestige II 340gsm</option>
-          <option value="Hahnemühle Torchon 285gsm">Hahnemühle Torchon 285gsm</option>
-          <option value="Hahnemühle William Turner 310gsm">Hahnemühle William Turner 310gsm</option>
-          <option value="Awagami Bamboo 170gsm">Awagami Bamboo 170gsm</option>
+          <option>Canson Infinity Rag Photographique 310gsm</option>
+          <option>Canson Infinity Arches 88 310gsm</option>
+          <option>Canson Infinity Arches BFK Rives 310gsm</option>
+          <option>Canson Infinity Arches Aquarelle 310gsm</option>
+          <option>Canson Infinity Baryta Prestige II 340gsm</option>
+          <option>Hahnemühle Torchon 285gsm</option>
+          <option>Hahnemühle William Turner 310gsm</option>
+          <option>Awagami Bamboo 170gsm</option>
         </select>
       </div>
     </div>
@@ -186,8 +167,7 @@
 
   <script>
     function calculatePrintPrice() {
-      // Your existing JS logic goes here (not shown in your upload)
-      // This is a placeholder; replace with your actual calculation logic if needed.
+      // placeholder logic — replace with your actual pricing logic
       const ids = ["price1to3", "price4to10", "price11to20", "price21plus"];
       for (let id of ids) {
         document.getElementById(id).textContent = "€0.00";
@@ -196,3 +176,4 @@
   </script>
 </body>
 </html>
+
