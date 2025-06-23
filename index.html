@@ -1,47 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Fine Art Print Price Calculator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art Repro Photography Price Calculator</title>
+  <style>
+    @font-face {
+      font-family: 'Helvetica Neue';
+      src: local('Helvetica Neue'), local('HelveticaNeue');
+    }
+    @font-face {
+      font-family: 'Helvetica Neue Light';
+      src: local('Helvetica Neue Light'), local('HelveticaNeue-Light');
+      font-weight: 300;
+    }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 2rem;
+    }
+    .calculator {
+      max-width: 700px;
+      background: #ffffff;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: #444;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      align-items: flex-end;
+    }
+    .form-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 200px;
+    }
+    label {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    select {
+      padding: 0.6rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button {
+      padding: 0.5rem 0.75rem;
+      background-color: #3366cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #254a99;
+    }
+    .discount-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    .discount-table th, .discount-table td {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .discount-table th {
+      background-color: #f9f9f9;
+    }
+    .discount-table td {
+      background-color: #e6f0fa;
+    }
+    .discount-table th:not(:first-child) {
+      font-family: 'Helvetica Neue Light', Arial, sans-serif;
+      font-weight: 300;
+    }
+    .iva-note {
+      text-align: right;
+      font-size: 0.75rem;
+      color: #888;
+      margin-top: 4px;
+    }
+  </style>
 </head>
 <body>
-<pre style="font-family: Helvetica, sans-serif; font-size: 16px; white-space: pre-wrap;">
-Fine Art Print Price Calculator
-Image Width (mm)
+  <div class="calculator">
+    <h1>Art Repro Photography Price Calculator</h1>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="size">Artwork Size</label>
+        <select id="size">
+          <option value="small">Long dimension ≤ 120cm</option>
+          <option value="large">Long dimension > 120cm</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="metallic">Metallic/Iridescent Paint?</label>
+        <select id="metallic">
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="detail">Level of Detail Captured</label>
+        <select id="detail">
+          <option value="single">Single Frame Capture</option>
+          <option value="4frame">4 Frame Multi-Capture</option>
+          <option value="16frame">16 Frame Multi-Capture</option>
+          <option value="64frame">64 Frame Multi-Capture</option>
+        </select>
+      </div>
+      <div class="form-group" style="align-items: flex-end; display: flex; justify-content: flex-end;">
+        <button onclick="calculateReproPrice()">Calculate</button>
+      </div>
+    </div>
+    <table class="discount-table">
+      <thead>
+        <tr>
+          <th>Quantity</th>
+          <th>1–4 Pieces</th>
+          <th><span style="font-family: 'Helvetica Neue';">5–9 Pieces</span><br><span style="font-family: 'Helvetica Neue Light';">(10% Discount)</span></th>
+          <th><span style="font-family: 'Helvetica Neue';">10–15 Pieces</span><br><span style="font-family: 'Helvetica Neue Light';">(15% Discount)</span></th>
+          <th><span style="font-family: 'Helvetica Neue';">16+ Pieces</span><br><span style="font-family: 'Helvetica Neue Light';">(20% Discount)</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Price per Piece</strong></td>
+          <td id="price1to4">€0.00</td>
+          <td id="price5to9">€0.00</td>
+          <td id="price10to15">€0.00</td>
+          <td id="price16plus">€0.00</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="iva-note"><em>IVA Additional</em></div>
+  </div>
 
-Image Height (mm)
+  <script>
+    function calculateReproPrice() {
+      const size = document.getElementById('size').value;
+      const metallic = document.getElementById('metallic').value;
+      const detail = document.getElementById('detail').value;
 
-Paper White Border Around Image (mm)
+      let base = 0;
+      if (size === 'large') {
+        if (detail === 'single') base = 45;
+        else if (detail === '4frame') base = 63;
+        else if (detail === '16frame') base = 124;
+        else base = 330;
+      } else {
+        if (detail === 'single') base = 34.5;
+        else if (detail === '4frame') base = 48;
+        else if (detail === '16frame') base = 95;
+        else base = 255;
+      }
 
-Added Paper Border Dimension Under Image (mm)
+      if (metallic === 'yes') base += 10;
 
-Paper Type
-          Canson Infinity Rag Photographique 310gsm
-          Canson Infinity Arches 88 310gsm
-          Canson Infinity Arches BFK Rives 310gsm
-          Canson Infinity Arches Aquarelle 310gsm
-          Canson Infinity Baryta Prestige II 340gsm
-          Hahnemühle Torchon 285gsm
-          Hahnemühle William Turner 310gsm
-          Awagami Bamboo 170gsm
-        
-Calculate
-Print Quantity
-1–3 Prints
-4–10 Prints
-(10% Discount)
-11–20 Prints
-(15% Discount)
-20+ Prints
-(20% Discount)
-Price Per Print
-€0.00
-€0.00
-€0.00
-€0.00
-* Minimum print size is A4, but we can print two A5 prints on a single A4 sheet at the A4 price
-<div style="text-align: right; font-size: 0.75rem; color: #888;"><em>IVA Additional</em></div>
-Simulation: Paper and image with specified border to scale
-</pre>
+      const discounts = [0, 0.10, 0.15, 0.20];
+      const ids = ['price1to4', 'price5to9', 'price10to15', 'price16plus'];
+
+      for (let i = 0; i < discounts.length; i++) {
+        const discounted = base * (1 - discounts[i]);
+        document.getElementById(ids[i]).textContent = `€${discounted.toFixed(2)}`;
+      }
+    }
+  </script>
 </body>
 </html>
