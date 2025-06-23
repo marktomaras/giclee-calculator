@@ -175,7 +175,9 @@ const borderArea = totalArea - imageArea;
 const imageRate = 160;
 const borderRate = 60;
 
-const basePrice = Math.max((imageArea * imageRate) + (borderArea * borderRate), 15);
+const imageCost = Math.max(imageArea * imageRate, 15);
+const borderCost = borderArea * borderRate;
+const basePrice = imageCost + borderCost;
 
         const discounts = [0, 0.10, 0.15, 0.20];
         const ids = ['price1to3', 'price4to10', 'price11to20', 'price20plus'];
