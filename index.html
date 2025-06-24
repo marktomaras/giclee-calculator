@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>
+   Giclée Print Calculator
+  </title>
+<style>
+   @font-face {
+      font-family: 'Helvetica Neue';
+      src: local('Helvetica Neue'), local('HelveticaNeue');
+    }
+    @font-face {
+      font-family: 'Helvetica Neue Light';
+      src: local('Helvetica Neue Light'), local('HelveticaNeue-Light');
+      font-weight: 300;
+    }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 2rem;
+    }
+    .calculator {
+      max-width: 900px;
+      background: #ffffff;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .form-area {
+      flex: 1;
+    }
+    .preview-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: #444;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .form-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 200px;
+    }
+    label {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    input[type="number"], select {
+      padding: 0.6rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .discount-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    .discount-table th, .discount-table td {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .discount-table th {
+      background-color: #f9f9f9;
+    }
+    .discount-table td {
+      background-color: #e6f0fa;
+    }
+    .discount-table th:not(:first-child) {
+      font-family: 'Helvetica Neue Light', Arial, sans-serif;
+      font-weight: 300;
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  </style>
+</head>
+<body>
+<div class="calculator">
+<div class="form-area">
+<h1 style="text-align: center; margin-top: -20px; margin-bottom: 0.2rem; width: 100%;">
+     Giclée Print Price Calculator
+    </h1>
+<p class="subtitle" style="text-align: center; margin-top: 0; margin-bottom: 2.5rem; width: 100%;">
+     Enter your art dimensions and desired amount of paper border
+    </p>
+<div class="form-row">
+<div class="form-group">
+<label for="imgWidth">
+       Image Width (mm)
+      </label>
+<input id="imgWidth" type="number" value="210"/>
+</div>
+<div class="form-group">
+<label for="imgHeight">
+       Image Height (mm)
+      </label>
+<input id="imgHeight" type="number" value="297"/>
+</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label for="border">
+       Paper White Border Around Image (mm)
+      </label>
+<input id="border" type="number" value="30"/>
+</div>
+<div class="form-group">
+<label for="bottomExtra">
+       Additional border below art (mm)
+      </label>
+<input id="bottomExtra" type="number" value="15"/>
+</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label for="paper">
+       Paper Type
+      </label>
+<select id="paper">
+<option value="160">
+        Canson Infinity Rag Photographique 310gsm
+       </option>
+<option value="160">
+        Canson Infinity Arches 88 310gsm
+       </option>
+<option value="160">
+        Canson Infinity Arches BFK Rives 310gsm
+       </option>
+<option value="160">
+        Canson Infinity Arches Aquarelle 310gsm
+       </option>
+<option value="160">
+        Canson Infinity Baryta Prestige II 340gsm
+       </option>
+<option value="160">
+        Hahnemühle Torchon 285gsm
+       </option>
+<option value="160">
+        Hahnemühle William Turner 310gsm
+       </option>
+<option value="160">
+        Awagami Bamboo 170gsm
+       </option>
+</select>
+</div>
+</div>
+</div>
+<div class="preview-area" style="padding-top: 86px;">
+<svg height="200" id="previewSVG" width="200" xmlns="http://www.w3.org/2000/svg">
+</svg>
+<p style="font-size: 0.85rem; color: #555; font-family: 'Helvetica Neue';margin-top: 12px; text-align: center;">
+     Simulation: Paper and image
+     <br/>
+     with specified border to scale
+    </p>
+</div>
+</div>
+<div class="calculator" style="margin-top: 1cm; flex-direction: column;">
+<table class="discount-table">
+<thead>
+<tr>
+<th>
+       Print Quantity
+      </th>
+<th>
+       1–3 Prints
+      </th>
+<th>
+<span style="font-family: 'Helvetica Neue';">
+        4–10 Prints
+       </span>
+<br/>
+<span style="font-family: 'Helvetica Neue Light';">
+        (10% Discount)
+       </span>
+</th>
+<th>
+<span style="font-family: 'Helvetica Neue';">
+        11–20 Prints
+       </span>
+<br/>
+<span style="font-family: 'Helvetica Neue Light';">
+        (15% Discount)
+       </span>
+</th>
+<th>
+<span style="font-family: 'Helvetica Neue';">
+        20+ Prints
+       </span>
+<br/>
+<span style="font-family: 'Helvetica Neue Light';">
+        (20% Discount)
+       </span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>
+        Price Per Print
+       </strong>
+</td>
+<td id="price1to3">
+       €0.00
+      </td>
+<td id="price4to10">
+       €0.00
+      </td>
+<td id="price11to20">
+       €0.00
+      </td>
+<td id="price20plus">
+       €0.00
+      </td>
+</tr>
+</tbody>
+</table>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0rem;">
+  <p style="font-size: 0.9rem; color: #666; font-family: 'Helvetica Neue'; margin: 0;">
+    * Minimum print size is A4. We can print multiple A5 or A6 prints on a single A4 sheet
+  </p>
+  <p style="font-size: 0.9rem; color: #666; font-family: 'Helvetica Neue'; margin: 0;">
+    IVA Additional
+  </p>
+</div>
+
+</div>
+<script>
+   function calculatePrice() {
+      const imgWidth = parseFloat(document.getElementById('imgWidth').value);
+      const imgHeight = parseFloat(document.getElementById('imgHeight').value);
+      const border = parseFloat(document.getElementById('border').value);
+      const bottomExtra = parseFloat(document.getElementById('bottomExtra').value);
+      const paperRate = parseFloat(document.getElementById('paper').value);
+
+      updatePreview(imgWidth, imgHeight, border, bottomExtra);
+
+      const totalWidth = imgWidth + 2 * border;
+      const totalHeight = imgHeight + border + border + bottomExtra;
+
+      const imageArea = (imgWidth / 1000) * (imgHeight / 1000);
+      const totalArea = (totalWidth / 1000) * (totalHeight / 1000);
+      const borderArea = totalArea - imageArea;
+
+      const imageRate = 160;
+      const borderRate = 75;
+
+      const imageCost = Math.max(imageArea * imageRate, 15);
+      const borderCost = borderArea * borderRate;
+      const basePrice = imageCost + borderCost;
+
+      const discounts = [0, 0.10, 0.15, 0.20];
+      const ids = ['price1to3', 'price4to10', 'price11to20', 'price20plus'];
+
+      for (let i = 0; i < discounts.length; i++) {
+        const discounted = basePrice * (1 - discounts[i]);
+        document.getElementById(ids[i]).textContent = `€${discounted.toFixed(2)}`;
+      }
+    }
+
+    function updatePreview(imgWidth, imgHeight, border, bottomExtra = 0) {
+      const svg = document.getElementById('previewSVG');
+      if (!svg || !imgWidth || !imgHeight || border < 0) return;
+
+      const fullWidth = imgWidth + 2 * border;
+      const fullHeight = imgHeight + border + border + bottomExtra;
+
+      const containerWidth = 200;
+      const containerHeight = 200;
+
+      const scale = Math.min(containerWidth / fullWidth, containerHeight / fullHeight);
+
+      const scaledPaperWidth = fullWidth * scale;
+      const scaledPaperHeight = fullHeight * scale;
+      const scaledImageWidth = imgWidth * scale;
+      const scaledImageHeight = imgHeight * scale;
+
+      const paperX = (containerWidth - scaledPaperWidth) / 2;
+      const paperY = (containerHeight - scaledPaperHeight) / 2;
+      const imageX = paperX + border * scale;
+      const imageY = paperY + border * scale;
+
+      svg.innerHTML = '';
+      const paperRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      paperRect.setAttribute("x", paperX);
+      paperRect.setAttribute("y", paperY);
+      paperRect.setAttribute("width", scaledPaperWidth);
+      paperRect.setAttribute("height", scaledPaperHeight);
+      paperRect.setAttribute("fill", "white");
+      paperRect.setAttribute("stroke", "#ccc");
+      paperRect.setAttribute("stroke-width", "1");
+      svg.appendChild(paperRect);
+
+      const imageRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      imageRect.setAttribute("x", imageX);
+      imageRect.setAttribute("y", imageY);
+      imageRect.setAttribute("width", scaledImageWidth);
+      imageRect.setAttribute("height", scaledImageHeight);
+      imageRect.setAttribute("fill", "#ccc");
+      svg.appendChild(imageRect);
+    }
+
+    window.onload = function() {
+      calculatePrice();
+      ['imgWidth', 'imgHeight', 'border', 'bottomExtra', 'paper'].forEach(id => {
+        document.getElementById(id).addEventListener('input', calculatePrice);
+      });
+    };
+  </script>
+</body>
+</html>
