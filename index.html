@@ -108,7 +108,103 @@
     input[type=number] {
       -moz-appearance: textfield;
     }
-  </style>
+  
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+  }
+  .form-group {
+    width: 100%;
+  }
+  input[type="number"], select {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .calculator {
+    flex-direction: column;
+  }
+  .form-row {
+    flex-direction: column;
+  }
+  .form-group {
+    width: 100%;
+  }
+  input[type="number"], select {
+    width: 100%;
+  }
+  #previewContainer {
+    order: 3;
+    margin-top: 2rem;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .discount-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  .discount-table thead,
+  .discount-table tbody,
+  .discount-table tr {
+    display: contents;
+  }
+  .discount-table th,
+  .discount-table td {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    text-align: center;
+    background: #e6f0fa;
+  }
+  .discount-table th:first-child,
+  .discount-table td:first-child {
+    background: #f9f9f9;
+    font-weight: bold;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .discount-table {
+    width: 100%;
+    border-collapse: collapse;
+    display: block;
+  }
+  .discount-table thead {
+    display: none;
+  }
+  .discount-table tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    background: #e6f0fa;
+  }
+  .discount-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-bottom: 1px solid #ccc;
+  }
+  .discount-table td:last-child {
+    border-bottom: none;
+  }
+  .discount-table td:before {
+    content: attr(data-label);
+    font-weight: bold;
+    flex-basis: 50%;
+    text-align: left;
+  }
+}
+
+</style>
 </head>
 <body>
 <div class="calculator">
@@ -181,7 +277,7 @@
 </div>
 </div>
 </div>
-<div class="preview-area" style="padding-top: 86px;">
+<div class="preview-area" id="previewContainer" style="padding-top: 86px;">
 <svg height="200" id="previewSVG" width="200" xmlns="http://www.w3.org/2000/svg">
 </svg>
 <p style="font-size: 0.85rem; color: #555; font-family: 'Helvetica Neue';margin-top: 12px; text-align: center;">
@@ -237,16 +333,16 @@
         Price Per Print
        </strong>
 </td>
-<td id="price1to3">
+<td id="price1to3" data-label="1–3 Prints">
        €0.00
       </td>
-<td id="price4to10">
+<td id="price4to10" data-label="4–10 Prints (10% Discount)">
        €0.00
       </td>
-<td id="price11to20">
+<td id="price11to20" data-label="11–20 Prints (15% Discount)">
        €0.00
       </td>
-<td id="price20plus">
+<td id="price20plus" data-label="20+ Prints (20% Discount)">
        €0.00
       </td>
 </tr>
