@@ -248,32 +248,43 @@
 <label for="paper">
        Paper Type
       </label>
+
 <select id="paper">
 <option value="160">
         Canson Infinity Rag Photographique 310gsm
        </option>
-<option value="160">
+<option value="165">
         Canson Infinity Arches 88 310gsm
        </option>
 <option value="160">
         Canson Infinity Arches BFK Rives 310gsm
        </option>
-<option value="160">
+<option value="165">
         Canson Infinity Arches Aquarelle 310gsm
        </option>
-<option value="160">
+<option value="167">
         Canson Infinity Baryta Prestige II 340gsm
        </option>
-<option value="160">
+<option value="161">
+        Canson Infinity Edition Etching Rag II 310gsm
+       </option>
+<option value="161">
         Hahnemühle Torchon 285gsm
        </option>
-<option value="160">
+<option value="166">
         Hahnemühle William Turner 310gsm
        </option>
-<option value="160">
+<option value="147">
+        Hahnemühle Photo Matte Fiber 200gsm
+       </option>
+<option value="167">
+        Hahnemühle Fine Art Baryta 325gsm
+       </option>
+<option value="154">
         Awagami Bamboo 170gsm
        </option>
 </select>
+
 </div>
 </div>
 </div>
@@ -351,7 +362,7 @@
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0rem;">
   <p style="font-size: 0.9rem; color: #666; font-family: 'Helvetica Neue'; margin: 0;">
-    * Minimum print size is A4. We can print multiple A5 or A6 prints on a single A4 sheet
+    
   </p>
   <p style="font-size: 0.9rem; color: #666; font-family: 'Helvetica Neue'; margin: 0;">
     IVA Additional
@@ -376,10 +387,10 @@
       const totalArea = (totalWidth / 1000) * (totalHeight / 1000);
       const borderArea = totalArea - imageArea;
 
-      const imageRate = 160;
+      const imageRate = paperRate;
       const borderRate = 75;
 
-      const imageCost = Math.max(imageArea * imageRate, 15);
+      const imageCost = (imageArea < 0.06237) ? imageArea * imageRate * 1.4 : imageArea * imageRate;
       const borderCost = borderArea * borderRate;
       const basePrice = imageCost + borderCost;
 
